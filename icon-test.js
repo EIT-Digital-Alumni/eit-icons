@@ -4,20 +4,25 @@ const fs = require('fs');
 const path = require('path');
 const Sprite = require('svg-sprite');
 
-const SVG_FOLDER = 'icons';
-const OUTPUT_FILE = 'svg-test.html';
-const TEMPLATE_FILE = 'template.html';
+const SVG_FOLDER = 'icons';           // folder with your SVG files
+const OUTPUT_FILE = 'svg-test.html';  // output HTML
+const TEMPLATE_FILE = 'template.html';// HTML template with placeholders
+
+// Utility: sanitize icon IDs
+function sanitizeId(name) {
+  return name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\-_:.]/g, '-');
+}
 
 // Configure svg-sprite
 const config = {
   mode: {
     symbol: {
-      inline: true,      // generate <symbol> sprite
+      inline: true,
       sprite: 'sprite.svg'
     }
   },
-  shape: {
-    transform: [] // disable default SVGO optimizations (you already optimized)
+  svg: {
+    namespaceClassnames: false
   }
 };
 
@@ -33,10 +38,17 @@ async function generateTestPage() {
 
   const spriter = new Sprite(config);
 
-  // Add all files to spriter
+  // Add all SVGs to the sprite
   svgFiles.forEach(file => {
     const filePath = path.join(SVG_FOLDER, file);
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, 'utf8').trim();
+
+    if (!content) {
+      console.warn('⚠️ Empty or invalid SVG skipped:', file);
+      return;
+    }
+
+    const iconId = sanitizeId(path.parse(file).name);
     spriter.add(filePath, null, content);
   });
 
@@ -47,22 +59,21 @@ async function generateTestPage() {
       return;
     }
 
-    // Grab the inline sprite string
     const spriteContent = result.symbol.sprite.contents.toString();
 
-    // Read the template file
+    // Read HTML template
     const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
 
-    // Generate the icon grid
+    // Generate icon grid HTML
     const iconGrid = svgFiles.map(file => {
-      const id = path.parse(file).name;
+      const iconId = sanitizeId(path.parse(file).name);
       return `    <div class="icon-card">
-      <svg class="icon"><use href="#${id}"></use></svg>
-      <div class="icon-name">${id}</div>
+      <svg class="icon"><use href="#${iconId}"></use></svg>
+      <div class="icon-name">${iconId}</div>
     </div>`;
     }).join('\n');
 
-    // Replace placeholders in the template
+    // Replace placeholders in template
     const html = template
       .replace('{{SPRITE_CONTENT}}', spriteContent)
       .replace('{{ICON_COUNT}}', svgFiles.length)
@@ -73,4 +84,5 @@ async function generateTestPage() {
   });
 }
 
+// Run
 generateTestPage();

@@ -1,0 +1,29 @@
+<!-- template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SVG Icon Test Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Inline sprite -->
+  {{SPRITE_CONTENT}}
+
+  <div class="header">
+    <h1>SVG Icon Test Page</h1>
+    <p>Testing {{ICON_COUNT}} icons with <code>currentColor</code> + background fill</p>
+  </div>
+
+  <div class="color-controls">
+    <label>Background: <input type="color" id="bgColorPicker" value="#f0f0f0"></label>
+    <label>Foreground: <input type="color" id="fgColorPicker" value="#374151"></label>
+  </div>
+
+  <div id="iconContainer" class="icon-grid">
+    {{ICON_GRID}}
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
