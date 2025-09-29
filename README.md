@@ -4,7 +4,7 @@ This README lists all the icons available in this repository.
 
 | Icon Name | Icon |
 |---|---|
-| add_user | <img src="" width="32"/> |
+| add_user | <img src="icons/add_user.svg" width="32"/> |
 | arrows_both_ways | <img src="icons/arrows_both_ways.svg" width="32"/> |
 | atom | <img src="icons/atom.svg" width="32"/> |
 | bar_chart | <img src="icons/bar_chart.svg" width="32"/> |
