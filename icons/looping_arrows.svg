@@ -1592,13 +1592,13 @@
         </clipPath>
     </defs>
     <g transform="translate(-281.5952,-207.48947)">
-        <g class="icon">
+        <g class="eit-icon">
             <path
                 d="m 0,0 c 0,-13.874 -11.247,-25.12 -25.12,-25.12 -13.873,0 -25.12,11.246 -25.12,25.12 0,13.874 11.247,25.12 25.12,25.12 C -11.247,25.12 0,13.874 0,0 Z"
                 transform="matrix(1.3333333,0,0,-1.3333333,349.24853,241.64947)" clip-path="url(#a)"
                 fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt"
                 stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="none"
-                stroke-opacity="1" class="icon-circle"></path>
+                stroke-opacity="1" class="eit-icon-circle"></path>
             <path d="M 0,0 V -7.038 H 7.038"
                 transform="matrix(1.3333333,0,0,-1.3333333,300.97773,222.18013)" clip-path="url(#c)"
                 fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"

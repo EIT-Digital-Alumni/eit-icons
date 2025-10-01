@@ -36,13 +36,13 @@
     </sodipodi:namedview>
     <g inkscape:groupmode="layer" inkscape:label="Capa 1"
         transform="translate(-361.32456,-44.949733)">
-        <g class="icon">
+        <g class="eit-icon">
             <path
                 d="m 0,0 c 0,-13.873 -11.247,-25.12 -25.12,-25.12 -13.874,0 -25.12,11.247 -25.12,25.12 0,13.874 11.246,25.12 25.12,25.12 C -11.247,25.12 0,13.874 0,0 Z"
                 transform="matrix(1.3333333,0,0,-1.3333333,428.97773,79.109733)" clip-path="url(#a)"
                 fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt"
                 stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="none"
-                stroke-opacity="1" class="icon-circle"></path>
+                stroke-opacity="1" class="eit-icon-circle"></path>
             <path
                 d="m 0,0 c 0,7.839 6.354,14.193 14.193,14.193 7.839,0 14.194,-6.354 14.194,-14.193 0,-7.838 -6.355,-14.193 -14.194,-14.193 C 6.354,-14.193 0,-7.838 0,0 Z"
                 transform="matrix(1.3333333,0,0,-1.3333333,376.65213,79.109733)"
