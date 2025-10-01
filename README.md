@@ -2,6 +2,39 @@
 
 This README lists all the icons available in this repository.
 
+## Installation
+
+You can install the EIT Icons web component as an npm module from the GitHub Package Registry:
+
+```bash
+npm install @EIT-Digital-Alumni/eit-icons
+```
+
+## Usage
+
+To use the component in your project:
+
+1.  Import the component's JavaScript file:
+
+    ```javascript
+    import '@EIT-Digital-Alumni/eit-icons';
+    ```
+
+    (If you're not using a module bundler, you can include it with a `<script>` tag, but you'll need to ensure the path is correct based on where you place the file.)
+
+2.  Use the `<eit-icons>` element in your HTML:
+
+    ```html
+    <eit-icons name="add_user" with-circle background="red"></eit-icons>
+    <eit-icons name="add_user"></eit-icons>
+    ```
+
+    **Attributes:**
+
+    *   `name`:  The name of the icon to display (e.g., "add_user").
+    *   `with-circle`:  Optional attribute. If present, the icon will have a circle behind it.
+    *   `background`:  Optional attribute.  Specifies the background color of the circle. Defaults to `currentColor`.
+
 | Icon Name | Icon |
 |---|---|
 | add_user | <img src="icons/add_user.svg" width="32"/> |
@@ -79,4 +112,4 @@ This README lists all the icons available in this repository.
 | user_profile | <img src="icons/user_profile.svg" width="32"/> |
 | user_search | <img src="icons/user_search.svg" width="32"/> |
 | video_play | <img src="icons/video_play.svg" width="32"/> |
-| wind_turbine | <img src="icons/wind_turbine.svg" width="32"/> |
+| wind_turbine | <img src="icons/wind_turbine.svg" width="32"/>
