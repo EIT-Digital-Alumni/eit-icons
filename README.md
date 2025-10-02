@@ -1,10 +1,27 @@
-# EIT Icons
+# EIT Icons Web Component
 
-This README lists all the icons available in this repository.
+This package provides a web component for displaying EIT icons with various styling options.
 
 ## Installation
 
-You can install the EIT Icons web component as an npm module from the GitHub Package Registry:
+### Using npm
+
+```bash
+npm install @EIT-Digital-Alumni/eit-icons
+```
+
+### Using GitHub Packages
+
+If you're using GitHub Packages, you'll need to authenticate with GitHub:
+
+1. Create a Personal Access Token (PAT) with the `read:packages` scope.
+2. Configure npm to use your PAT:
+
+```bash
+npm login --registry=https://npm.pkg.github.com --scope=@EIT-Digital-Alumni
+```
+
+3. Install the package:
 
 ```bash
 npm install @EIT-Digital-Alumni/eit-icons
@@ -12,28 +29,58 @@ npm install @EIT-Digital-Alumni/eit-icons
 
 ## Usage
 
-To use the component in your project:
+### Import in JavaScript
 
-1.  Import the component's JavaScript file:
+There are multiple ways to import the component:
 
-    ```javascript
-    import '@EIT-Digital-Alumni/eit-icons';
-    ```
+#### ES Modules (Recommended)
 
-    (If you're not using a module bundler, you can include it with a `<script>` tag, but you'll need to ensure the path is correct based on where you place the file.)
+```javascript
+import '@EIT-Digital-Alumni/eit-icons';
 
-2.  Use the `<eit-icons>` element in your HTML:
+// Or if you want to access the component class
+import { EitIcons } from '@EIT-Digital-Alumni/eit-icons';
+```
 
-    ```html
-    <eit-icons name="add_user" with-circle background="red"></eit-icons>
-    <eit-icons name="add_user"></eit-icons>
-    ```
+#### CommonJS
 
-    **Attributes:**
+```javascript
+const EitIcons = require('@EIT-Digital-Alumni/eit-icons');
+```
 
-    *   `name`:  The name of the icon to display (e.g., "add_user").
-    *   `with-circle`:  Optional attribute. If present, the icon will have a circle behind it.
-    *   `background`:  Optional attribute.  Specifies the background color of the circle. Defaults to `currentColor`.
+#### Browser with CDN
+
+```html
+<script type="module" src="https://unpkg.com/@EIT-Digital-Alumni/eit-icons"></script>
+```
+
+### Using the Component
+
+Once imported, you can use the component in your HTML:
+
+```html
+<!-- Basic usage -->
+<eit-icons name="add_user"></eit-icons>
+
+<!-- With circle and background color -->
+<eit-icons name="book" with-circle background="red"></eit-icons>
+```
+
+## Attributes
+
+The component supports the following attributes:
+
+| Attribute | Description | Default |
+|---|---|---|
+| `name` | Name of the icon to display (required) | - |
+| `with-circle` | If present, adds a circle behind the icon | - |
+| `background` | Color of the circle (when `with-circle` is present) | currentColor |
+
+If the `with-circle` attribute is set, the circle class will be filled with the background color, and the icon color will be set to white.
+
+If `with-circle` is not set, the icon will be scaled up by 1.5x and the circle will be hidden.
+
+## Available Icons
 
 | Icon Name | Icon |
 |---|---|
@@ -112,4 +159,24 @@ To use the component in your project:
 | user_profile | <img src="icons/user_profile.svg" width="32"/> |
 | user_search | <img src="icons/user_search.svg" width="32"/> |
 | video_play | <img src="icons/video_play.svg" width="32"/> |
-| wind_turbine | <img src="icons/wind_turbine.svg" width="32"/>
+| wind_turbine | <img src="icons/wind_turbine.svg" width="32"/> |
+
+## Development
+
+### Building the package
+
+```bash
+npm run build
+```
+
+### Running the example showcase
+
+```bash
+cd example
+npm install
+npm run dev
+```
+
+## License
+
+Proprietary. All rights reserved.

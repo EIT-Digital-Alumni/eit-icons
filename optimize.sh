@@ -1,1 +1,0 @@
-svgo -rf icons -o oicons

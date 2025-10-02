@@ -2,13 +2,31 @@
   "name": "@EIT-Digital-Alumni/eit-icons",
   "version": "1.0.0",
   "description": "A web component for displaying EIT icons.",
-  "main": "eit-icons.js",
-  "module": "eit-icons.js",
+  "type": "module",
+  "main": "dist/eit-icons.cjs.js",
+  "module": "dist/eit-icons.esm.js",
+  "browser": "dist/eit-icons.umd.js",
+  "unpkg": "dist/eit-icons.umd.js",
+  "exports": {
+    ".": {
+      "import": "./dist/eit-icons.esm.js",
+      "require": "./dist/eit-icons.cjs.js",
+      "browser": "./dist/eit-icons.umd.js"
+    },
+    "./style": "./dist/style.css",
+    "./package.json": "./package.json"
+  },
   "files": [
-    "eit-icons.js",
+    "dist",
     "icons",
     "LICENSE"
   ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "cd example && npm run dev",
+    "prepublishOnly": "npm run build"
+  },
   "publishConfig": {
     "@EIT-Digital-Alumni:registry": "https://npm.pkg.github.com"
   },
@@ -16,17 +34,18 @@
     "type": "git",
     "url": "git+https://github.com/EIT-Digital-Alumni/eit-icons.git"
   },
+  "keywords": [
+    "webcomponent",
+    "icons",
+    "svg",
+    "eit"
+  ],
   "license": "proprietary",
-  "scripts": {
-    "build": "echo \"No build step needed\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "bugs": {
     "url": "https://github.com/EIT-Digital-Alumni/eit-icons/issues"
   },
   "homepage": "https://github.com/EIT-Digital-Alumni/eit-icons#readme",
-  "dependencies": {
-    "svg-sprite": "^2.0.4"
-  },
-  "type": "module"
+  "devDependencies": {
+    "rollup": "^4.13.0"
+  }
 }
