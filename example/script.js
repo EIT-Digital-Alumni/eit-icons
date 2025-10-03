@@ -156,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleCircle = document.getElementById("toggle-circle");
   const colorBtns = Array.from(document.querySelectorAll(".color-btn"));
   const colorMode = document.getElementById("color-mode");
+  const sizeSelector = document.getElementById("size-selector");
   let selectedColor = colorBtns[0].dataset.color;
 
   colorBtns.forEach((btn) => {
@@ -169,8 +170,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   toggleCircle.addEventListener("change", updateIcons);
   colorMode.addEventListener("change", updateIcons);
+  if (sizeSelector) sizeSelector.addEventListener("change", updateIcons);
 
   function updateIcons() {
+    const size = parseInt((sizeSelector && sizeSelector.value) || "40", 10);
+    if (!Number.isNaN(size)) {
+      document.documentElement.style.setProperty("--icon-size", size + "px");
+    }
     document.querySelectorAll("eit-icons").forEach((icon) => {
       if (toggleCircle.checked) {
         icon.setAttribute("with-circle", "");

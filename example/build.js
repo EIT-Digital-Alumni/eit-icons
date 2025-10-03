@@ -1,44 +1,100 @@
-/eit-icons/example/build.js
 /**
- * Build script for generating icon showcase HTML from template and CSS.
+ * Build script (ESM) to inject generated icon names into example/script.js
  * Usage: node build.js
  */
 
-const fs = require("fs");
-const path = require("path");
+import { promises as fs } from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// Paths
-const ICONS_DIR = path.join(__dirname, "..", "icons");
-const TEMPLATE_FILE = path.join(__dirname, "template.html");
-const CSS_FILE = path.join(__dirname, "style.css");
-const OUTPUT_FILE = path.join(__dirname, "index.html");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const ROOT_DIR = path.resolve(__dirname, "..");
 
-// Get all SVG icon names
-const iconNames = fs
-  .readdirSync(ICONS_DIR)
-  .filter((file) => file.endsWith(".svg"))
-  .map((file) => path.parse(file).name);
+/**
+ * Resolve icons directory. Prefer src/icons, fallback to icons.
+ */
+async function resolveIconsDir() {
+  const candidates = [
+    path.join(ROOT_DIR, "src", "icons"),
+    path.join(ROOT_DIR, "icons"),
+  ];
 
-// Generate icon cards HTML
-const examplesHTML = iconNames
-  .map(
-    (iconName) => `
-    <div class="example-card">
-      <h3>${iconName}</h3>
-      <eit-icons name="${iconName}"></eit-icons>
-    </div>
-  `
-  )
-  .join("\n");
+  for (const p of candidates) {
+    try {
+      const stat = await fs.stat(p);
+      if (stat.isDirectory()) return p;
+    } catch {
+      // ignore
+    }
+  }
 
-// Read template and CSS
-const template = fs.readFileSync(TEMPLATE_FILE, "utf8");
-const css = fs.readFileSync(CSS_FILE, "utf8");
+  throw new Error(
+    `Could not locate icons directory. Tried: ${candidates.join(", ")}`,
+  );
+}
 
-// Replace placeholders in template
-const html = template
-  .replace("{{EXAMPLES}}", examplesHTML)
-  .replace("{{STYLE}}", `<style>\n${css}\n</style>`);
+/**
+ * Read *.svg icon names (without extension) in the given directory.
+ */
+async function getIconNames(iconsDir) {
+  const entries = await fs.readdir(iconsDir, { withFileTypes: true });
+  const names = entries
+    .filter((e) => e.isFile() && e.name.toLowerCase().endsWith(".svg"))
+    .map((e) => path.parse(e.name).name)
+    .sort((a, b) => a.localeCompare(b));
+  return names;
+}
 
-fs.writeFileSync(OUTPUT_FILE, html);
-console.log(`✅ Generated ${OUTPUT_FILE} with ${iconNames.length} icons`);
+/**
+ * Update example/script.js by replacing the `const iconNames = [...]` array with the generated list.
+ */
+async function injectIconNamesIntoScript(scriptPath, iconNames) {
+  const content = await fs.readFile(scriptPath, "utf8");
+
+  const ICON_ARRAY_REGEX = /const\s+iconNames\s*=\s*\[[\s\S]*?\];/m;
+  if (!ICON_ARRAY_REGEX.test(content)) {
+    throw new Error(
+      `Could not find 'const iconNames = [...]' array in ${scriptPath}`,
+    );
+  }
+
+  const generatedArray = `const iconNames = [
+${iconNames.map((n) => `  "${n}",`).join("\n")}
+];`;
+
+  const updated = content.replace(ICON_ARRAY_REGEX, generatedArray);
+
+  if (updated === content) {
+    return { changed: false };
+  }
+
+  await fs.writeFile(scriptPath, updated, "utf8");
+  return { changed: true };
+}
+
+async function main() {
+  const iconsDir = await resolveIconsDir();
+  const names = await getIconNames(iconsDir);
+
+  const scriptPath = path.join(__dirname, "script.js");
+  const { changed } = await injectIconNamesIntoScript(scriptPath, names);
+
+  const relIcons = path.relative(ROOT_DIR, iconsDir) || iconsDir;
+  const relScript = path.relative(ROOT_DIR, scriptPath) || scriptPath;
+
+  if (changed) {
+    console.log(
+      `✅ Injected ${names.length} icon names from '${relIcons}' into '${relScript}'`,
+    );
+  } else {
+    console.log(
+      `ℹ️ No changes needed. '${relScript}' already has ${names.length} icon names from '${relIcons}'.`,
+    );
+  }
+}
+
+main().catch((err) => {
+  console.error("❌ Build failed:", err.message || err);
+  process.exit(1);
+});
