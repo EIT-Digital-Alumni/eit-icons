@@ -1,0 +1,126 @@
+/* styles.css - Icon Showcase Styling */
+
+body {
+    font-family: sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 2rem;
+    color: #222;
+}
+
+.toolbar {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin: 24px 0;
+    flex-wrap: wrap;
+    background: #fff;
+    padding: 16px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.examples-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.example-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Added to vertically center content */
+    margin: 10px;
+    padding: 16px; /* Increased padding */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 150px;
+    height: 120px; /* Fixed height for consistent card sizes */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    background: #fafafa;
+    transition: box-shadow 0.2s;
+    position: relative; /* For absolute positioning of icon container */
+}
+
+.example-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.example-card h3 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    word-break: break-word; /* Changed from break-all for better readability */
+    text-align: center;
+    color: #333;
+}
+
+/* Icon container to center the component */
+.example-card .icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px; /* Fixed height for icon area */
+}
+
+eit-icons {
+    margin: 0 auto; /* Center horizontally */
+    width: 40px; /* Slightly larger */
+    height: 40px;
+    display: block;
+    transition: color 0.2s;
+}
+
+.color-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin: 0 4px;
+    cursor: pointer;
+    outline: none;
+    background: none;
+    transition: border 0.2s;
+}
+
+.color-btn.selected {
+    border: 2px solid #333;
+}
+
+/* Added styles for select and input elements */
+select,
+input[type="checkbox"] {
+    margin: 0 5px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .example-card {
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+    }
+    .example-card .icon-container {
+        height: 40px;
+    }
+    .examples-container {
+        gap: 8px;
+    }
+    .toolbar {
+        gap: 8px;
+    }
+}

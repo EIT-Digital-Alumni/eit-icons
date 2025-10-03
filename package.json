@@ -1,5 +1,38 @@
 {
-  "dependencies": {
-    "svg-sprite": "^2.0.4"
-  }
+  "name": "@EIT-Digital-Alumni/eit-icons",
+  "version": "1.0.0",
+  "description": "A web component for displaying EIT icons.",
+  "type": "module",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src/index.js",
+    "src/icons.js"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "prepublishOnly": "npm run build",
+    "dev": "npm run build -- --watch"
+  },
+  "publishConfig": {
+    "@EIT-Digital-Alumni:registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EIT-Digital-Alumni/eit-icons.git"
+  },
+  "keywords": [
+    "webcomponent",
+    "icons",
+    "svg",
+    "eit"
+  ],
+  "license": "proprietary",
+  "bugs": {
+    "url": "https://github.com/EIT-Digital-Alumni/eit-icons/issues"
+  },
+  "homepage": "https://github.com/EIT-Digital-Alumni/eit-icons#readme"
 }

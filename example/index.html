@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>EIT Icons Showcase</title>
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body>
+        <h1>EIT Icons Showcase</h1>
+        <div class="toolbar">
+            <label>
+                <input type="checkbox" id="toggle-circle" checked />
+                Show Circle
+            </label>
+            <span>Color:</span>
+            <div id="color-buttons"></div>
+            <span>Apply to:</span>
+            <select id="color-mode">
+                <option value="stroke">Icon Stroke</option>
+                <option value="circle">Circle Fill</option>
+            </select>
+        </div>
+        <div class="examples-container" id="examples-container">
+            <!-- Icon cards will be injected here by script.js -->
+        </div>
+        <script type="module" src="./script.js"></script>
+    </body>
+</html>

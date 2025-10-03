@@ -1,6 +1,129 @@
-# EIT Icons
+# EIT Icons Web Component
 
-This README lists all the icons available in this repository.
+This package provides a web component for displaying EIT icons with various styling options.
+
+## Installation
+
+### Using npm
+
+```bash
+npm install @EIT-Digital-Alumni/eit-icons
+```
+
+### Using GitHub Packages
+
+If you're using GitHub Packages, you'll need to authenticate with GitHub:
+
+1. Create a Personal Access Token (PAT) with the `read:packages` scope.
+2. Configure npm to use your PAT:
+
+```bash
+npm login --registry=https://npm.pkg.github.com --scope=@EIT-Digital-Alumni
+```
+
+3. Install the package:
+
+```bash
+npm install @EIT-Digital-Alumni/eit-icons
+```
+
+## Usage
+
+### Import in JavaScript
+
+There are multiple ways to import the component:
+
+#### ES Modules (Recommended)
+
+```javascript
+import '@EIT-Digital-Alumni/eit-icons';
+
+// Or if you want to access the component class
+import { EitIcons } from '@EIT-Digital-Alumni/eit-icons';
+```
+
+#### CommonJS
+
+```javascript
+const EitIcons = require('@EIT-Digital-Alumni/eit-icons');
+```
+
+#### Browser with CDN
+
+```html
+<script type="module" src="https://unpkg.com/@EIT-Digital-Alumni/eit-icons"></script>
+```
+
+### Using the Component
+
+Once imported, you can use the component in your HTML:
+
+```html
+<!-- Basic usage -->
+<eit-icons name="add_user"></eit-icons>
+
+<!-- With circle and background color -->
+<eit-icons name="book" with-circle background="red"></eit-icons>
+```
+
+## Asset layout and path resolution
+
+This package ships SVGs as separate files so only the icons you use are requested by the browser.
+
+Where the icons live after install:
+- Package source: icons/<name>.svg
+- Distributed bundle: dist/icons/<name>.svg (copied automatically on build/publish)
+
+How the component finds icons:
+- In module/bundler environments, the component derives the icon URL relative to the JS file using import.meta.url, resolving to dist/icons/<name>.svg next to the distributed bundle.
+- When loaded via a script tag/CDN, icons are resolved relative to the script URL so the CDN path must expose an icons folder next to the distributed file (dist/icons in this package). Public CDNs like unpkg and jsDelivr serve these files as long as the package includes them.
+
+If your app build doesn't copy static files by default:
+- Ensure node_modules/@EIT-Digital-Alumni/eit-icons/dist/icons is included in your app's final assets.
+- Optionally configure an alias for direct references if needed (not required for the component itself):
+
+Vite example:
+```js
+// vite.config.js
+export default {
+  resolve: {
+    alias: {
+      '@EIT-Digital-Alumni/eit-icons/icons':
+        '/node_modules/@EIT-Digital-Alumni/eit-icons/dist/icons'
+    }
+  }
+}
+```
+
+Webpack example:
+```js
+// webpack.config.js
+const path = require('path');
+module.exports = {
+  resolve: {
+    alias: {
+      '@EIT-Digital-Alumni/eit-icons/icons':
+        path.resolve(__dirname, 'node_modules/@EIT-Digital-Alumni/eit-icons/dist/icons')
+    }
+  }
+};
+```
+
+## Attributes
+
+The component supports the following attributes:
+
+| Attribute | Description | Default |
+|---|---|---|
+| `name` | Name of the icon to display (required) | - |
+| `with-circle` | If present, adds a circle behind the icon | - |
+| `background` | Color of the circle (when `with-circle` is present) | currentColor |
+
+If the `with-circle` attribute is set, the circle class will be filled with the background color, and the icon color will be set to white.
+
+If `with-circle` is not set, the icon will be scaled up by 1.5x and the circle will be hidden.
+
+## Available Icons
 
 | Icon Name | Icon |
 |---|---|
@@ -80,3 +203,59 @@ This README lists all the icons available in this repository.
 | user_search | <img src="icons/user_search.svg" width="32"/> |
 | video_play | <img src="icons/video_play.svg" width="32"/> |
 | wind_turbine | <img src="icons/wind_turbine.svg" width="32"/> |
+
+## Package structure
+
+```
+eit-icons/
+├── src/
+│   └── eit-icons.js
+├── icons/                 # SVG assets shipped with the package
+│   ├── add_user.svg
+│   └── ...
+├── dist/                  # Build output (generated)
+│   ├── eit-icons.esm.js
+│   ├── eit-icons.cjs.js
+│   ├── eit-icons.umd.js
+│   └── icons/            # SVGs copied here on build
+└── scripts/
+    └── optimize-svgs.cjs # Optional: optimize SVGs (SVGO)
+```
+
+## Build and publish
+
+- Build locally:
+```bash
+npm install
+npm run build
+```
+
+The build:
+- produces ESM, CJS, and UMD bundles into dist/
+- copies SVGs into dist/icons so they are available at runtime
+
+Optional optimization before publishing:
+```bash
+# requires devDependency: svgo
+node scripts/optimize-svgs.cjs
+```
+
+## Development
+
+### Building the package
+
+```bash
+npm run build
+```
+
+### Running the example showcase
+
+```bash
+cd example
+npm install
+npm run dev
+```
+
+## License
+
+Proprietary. All rights reserved.
