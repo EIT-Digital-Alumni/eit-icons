@@ -4,12 +4,6 @@ on:
   release:
     types: [created]
 
-# Required permissions for GitHub Pages deployments
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 # Avoid concurrent deployments
 concurrency:
   group: pages
@@ -36,7 +30,7 @@ jobs:
       - name: Install dependencies
         working-directory: example
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm install
 
       - name: Build example with Vite
