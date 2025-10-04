@@ -3,17 +3,16 @@
   "version": "1.0.0",
   "description": "A web component for displaying EIT icons.",
   "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "main": "dist/index.bundle.js",
+  "module": "dist/index.bundle.js",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./dist/index.bundle.js"
   },
   "files": [
-    "src/index.js",
-    "src/icons.js"
+    "dist/index.bundle.js"
   ],
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js && rollup -c",
     "prepublishOnly": "npm run build",
     "dev": "npm run build -- --watch"
   },
@@ -34,5 +33,9 @@
   "bugs": {
     "url": "https://github.com/EIT-Digital-Alumni/eit-icons/issues"
   },
-  "homepage": "https://github.com/EIT-Digital-Alumni/eit-icons#readme"
+  "homepage": "https://github.com/EIT-Digital-Alumni/eit-icons#readme",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.2",
+    "rollup": "^4.52.4"
+  }
 }

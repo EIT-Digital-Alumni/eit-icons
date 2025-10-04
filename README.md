@@ -6,16 +6,32 @@ If you want to quickly try the icons, clone the repo and run the example (see â€
 
 ## Installation
 
-Using GitHub Packages:
-1) Create a Personal Access Token with `read:packages`.
-2) Authenticate for the @EIT-Digital-Alumni scope:
-```bash
-npm login --registry=https://npm.pkg.github.com --scope=@EIT-Digital-Alumni
-```
-3) Install:
-```bash
-npm install @EIT-Digital-Alumni/eit-icons
-```
+Using GitHub Packages, you can authenticate either by logging in or by configuring an `.npmrc` file.
+
+### Option 1: Login
+1. Create a Personal Access Token with `read:packages`.
+2. Authenticate for the `@EIT-Digital-Alumni` scope:
+    ```bash
+    npm login --registry=https://npm.pkg.github.com --scope=@EIT-Digital-Alumni
+    ```
+3. Install the package:
+    ```bash
+    npm install @EIT-Digital-Alumni/eit-icons
+    ```
+
+### Option 2: Configure `.npmrc`
+1. Create a Personal Access Token with `read:packages`.
+2. Add the following to your `.npmrc` file:
+    ```
+    @EIT-Digital-Alumni:registry=https://npm.pkg.github.com
+    //npm.pkg.github.com/:_authToken=YOUR_PERSONAL_ACCESS_TOKEN
+    ```
+3. Install the package:
+    ```bash
+    npm install @EIT-Digital-Alumni/eit-icons
+    ```
+
+Choose the method that best fits your workflow.
 
 ## Getting started
 

@@ -27,22 +27,20 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          registry-url: "https://npm.pkg.github.com/"
-          scope: "@EIT-Digital-Alumni"
-          always-auth: true
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Install dependencies
-        working-directory: example
-        run: npm install
+          - name: Install dependencies
+          working-directory: example
+          env:
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          run: npm install
 
       - name: Build example with Vite
         working-directory: example
         env:
           NODE_ENV: production
-          # Vite config auto-detects GITHUB_REPOSITORY to set correct base for Pages
         run: npm run build
 
       - name: Upload Pages artifact
