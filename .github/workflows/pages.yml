@@ -31,11 +31,11 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-          - name: Install dependencies
-          working-directory: example
-          env:
-            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          run: npm install
+      - name: Install dependencies
+        working-directory: example
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm install
 
       - name: Build example with Vite
         working-directory: example
