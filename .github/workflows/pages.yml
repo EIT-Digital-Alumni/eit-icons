@@ -2,7 +2,7 @@ name: Deploy Example to GitHub Pages
 
 on:
   release:
-    types: [created]
+    types: [push]
 
 # Required permissions for GitHub Pages deployments
 permissions:
@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         working-directory: example
         env:
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm install
 
       - name: Build example with Vite
