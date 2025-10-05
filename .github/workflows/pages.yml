@@ -1,8 +1,8 @@
 name: Deploy Example to GitHub Pages
-
 on:
-  release:
-    types: [push]
+  push:
+    branches:
+      - main
 
 # Required permissions for GitHub Pages deployments
 permissions:
