@@ -16,8 +16,10 @@ jobs:
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
-          scope: '@EIT-Digital-Alumni'
+          scope: "@EIT-Digital-Alumni"
       - run: npm ci
+      # Optional sanity check to see exactly what will be published
+      - run: npm pack --dry-run
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
