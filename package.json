@@ -14,7 +14,8 @@
   "scripts": {
     "build": "node scripts/build.js && rollup -c",
     "prepublishOnly": "npm run build",
-    "dev": "npm run build -- --watch"
+    "dev": "npm run build -- --watch",
+    "optimize-icons": "node scripts/optimize-icons.js"
   },
   "publishConfig": {
     "@EIT-Digital-Alumni:registry": "https://npm.pkg.github.com"
@@ -36,6 +37,7 @@
   "homepage": "https://github.com/EIT-Digital-Alumni/eit-icons#readme",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.2",
-    "rollup": "^4.52.4"
+    "rollup": "^4.52.4",
+    "svgo": "^4.0.0"
   }
 }
