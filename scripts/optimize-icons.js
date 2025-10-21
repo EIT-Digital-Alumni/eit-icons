@@ -8,40 +8,9 @@ const __dirname = path.dirname(__filename);
 
 const ICONS_DIR = path.join(__dirname, '../src/icons');
 
-const svgoConfig = {
-  plugins: [
-    {
-      name: 'preset-default',
-      params: {
-        overrides: {
-          removeViewBox: false,
-          cleanupIds: false,
-          convertColors: false,
-          removeUnknownsAndDefaults: {
-            keepDataAttrs: true,
-            keepAriaAttrs: true,
-            keepRoleAttr: true,
-          },
-          mergePaths: false,
-          convertShapeToPath: false,
-          convertPathData: {
-            floatPrecision: 2,
-          },
-        },
-      },
-    },
-    {
-      name: 'removeAttrs',
-      params: {
-        attrs: ['data-name'],
-      },
-    },
-  ],
-};
-
 async function optimizeSvgFile(filePath) {
   const content = await fs.readFile(filePath, 'utf8');
-  const result = optimize(content, { path: filePath, ...svgoConfig });
+  const result = optimize(content, { path: filePath});
   await fs.writeFile(filePath, result.data);
   return { path: filePath, originalSize: content.length, optimizedSize: result.data.length };
 }
