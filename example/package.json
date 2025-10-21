@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@EIT-Digital-Alumni/eit-icons": "^1.1.1"
+    "@EIT-Digital-Alumni/eit-icons": "^1.1.2"
   },
   "devDependencies": {
     "vite": "^5.0.0"
